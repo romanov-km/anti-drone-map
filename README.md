@@ -1,54 +1,59 @@
-# React + TypeScript + Vite
+# 🛰️ Anti-Drone Map
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Интерактивное React-приложение, отображающее анти-дрон устройства на карте с поддержкой popup-информации, drag & drop и визуальными связями между родительскими и дочерними устройствами.
 
-Currently, two official plugins are available:
+Тестовое задание для позиции *** Frontend-разработчика** в компанию **Stupor**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Стек технологий
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 18** + **TypeScript**
+- **React Leaflet** + **Leaflet**
+- **Vite** + **npm**
+- **JSON-данные устройств**
+- Компонентный подход и хуки (`useMap`, `useState`)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 💡 Функциональность
+
+✅ Отображение карты OpenStreetMap  
+✅ Отрисовка маркеров устройств с popup-информацией  
+✅ Разные иконки по типу устройства (`basic`, `advanced`, `special`)  
+✅ Устройства с `children` — отображаются рядом, уменьшены  
+✅ Соединительные линии от родителя к каждому дочернему устройству  
+✅ Только `special`-устройства можно перетаскивать  
+✅ После drag & drop — обновляется координата и отображается в popup
+
+---
+
+## 🗂 Структура
+
+```plaintext
+src/
+  ├── assets/
+  │     └── icons/           # PNG иконки устройств
+  ├── components/
+  │     ├── DeviceMap.tsx    # Карта и вся логика
+  │     └── DeviceMarker.tsx # Отдельный маркер устройств
+  ├── data/
+  │     └── devices.json     # Массив устройств
+  ├── types/
+  │     └── device.ts        # Интерфейс IDevice
+  └── utils/
+        └── getIcon.ts       # Функция генерации иконок
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Запуск проекта
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install
+npm run dev
 ```
+
+Открой http://localhost:5173 в браузере
+
+📸 Скриншот
+
+![Превью карты](./public/screenshot.png)
