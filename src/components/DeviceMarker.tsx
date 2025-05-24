@@ -14,21 +14,30 @@ interface Props {
 const DeviceMarker = ({ device, offset = 0, draggable = false, isChild }: Props) => {
     const map = useMap();
 
-    const initialPosition: [number, number] = [
-      device.lat + offset,
-      device.lon + offset,
-    ];
-  
+    //функция для ключа
+    const getStorageKey = (id: string) => `device-position-${id}`;
+
+    const stored = localStorage.getItem(getStorageKey(device.id));
+    const initialPosition: [number, number] = stored
+        ? JSON.parse(stored)
+        : [device.lat + offset, device.lon + offset];
+
     const [position, setPosition] = useState<[number, number]>(initialPosition);
-  
+
     const handleDoubleClick = () => {
       map.setView(position, 17);
     };
   
     const handleDragEnd = (e: LeafletEvent) => {
-      const { lat, lng } = e.target.getLatLng();
-      setPosition([lat, lng]);
-      console.log(`Новая позиция для ${device.name}:`, lat, lng);
+        const { lat, lng } = e.target.getLatLng();
+        setPosition([lat, lng]);
+
+        localStorage.setItem(
+            getStorageKey(device.id),
+            JSON.stringify([lat, lng])
+          );
+    
+        console.log(`Новая позиция для ${device.name}:`, lat, lng);
     };
   
     return (

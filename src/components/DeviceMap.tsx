@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
+import { MapContainer, TileLayer, Polyline } from "react-leaflet";
 import type { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import devices from '../data/devices.json';
@@ -47,9 +47,6 @@ const DeviceMap = () => {
                     );
                 }) ?? []
             )}
-            <Marker position={center}>
-                <Popup>Музей</Popup>
-            </Marker>
         </MapContainer>
     );
 };
